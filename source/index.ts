@@ -1,8 +1,9 @@
 import inquirer from "inquirer"
+process.stdin.setMaxListeners(20); // Set the number as needed
 let todo_job_list = [
-    '1) this is first todo'
+    '1) this is first todo',
 ]
-let completed_todo_s = []
+let completed_todo_s: string[] = []
 async function Application() {
     const answers = await inquirer.prompt([
         {
@@ -19,37 +20,37 @@ async function Application() {
         }
     ]);
     if (answers.todo_name == '*> View TODOs') {
-        if (todo_job_list.length > 0) {
-            console.log(todo_job_list)
+        if (todo_job_list.length === 0) {
+            console.log('No Todo avaiable to View, please Add.')
+            Application()
         }
-        Application()
+        else {
+            console.log(todo_job_list)
+            Application()
+        }
     }
     else if (answers.todo_name == '*> Add  TODO') {
         Add_TODO()
     }
     else if (answers.todo_name == '*> Del  TODO') {
-        if (todo_job_list.length > 0) {
-            Delete_TODO()
+        if (todo_job_list.length === 0) {
+            console.log('No Todo to Delete, please Add.')
+            Application()
         }
         else {
-            console.log('No Todo to Delete, please Add.')
-            Application()
+            Delete_TODO()
         }
-
-
     }
     else if (answers.todo_name == '*> Move to Complete') {
-        if (todo_job_list.length > 0) {
-
-            MoveToCompleteTodo()
-        } else {
-            console.log('No Todo to Delete, please Add.')
+        if (todo_job_list.length === 0) {
+            console.log('No Todo avaiable to move, please Add.')
             Application()
+        } else {
+            MoveToCompleteTodo()
         }
-
     }
     else if (answers.todo_name == '*> View Completed  TODOs') {
-        console.log('todo_job_list = ', todo_job_list)
+        console.log('completed_todo_s', completed_todo_s)
         Application()
     }
     else if (answers.todo_name == '*> Exit  TODO') {
@@ -69,19 +70,21 @@ async function Add_TODO() {
     Application()
 }
 async function Delete_TODO() {
-    // console.log('Select a ToDo to Delete')
     const answers = await inquirer.prompt([
         {
             type: 'list',
-            name: 'deletToDo',
+            name: 'deleteToDo',
+            message: 'Select a ToDo to Delete',
             choices: todo_job_list
-
         }
     ]);
-    todo_job_list = todo_job_list.filter(todo => todo !== answers.deleteToDo);
-    Application()
 
+    // Filter out the selected ToDo item
+    todo_job_list = todo_job_list.filter(todo => todo !== answers.deleteToDo);
+
+    Application();
 }
+
 async function MoveToCompleteTodo() {
     const answers = await inquirer.prompt([
         {
@@ -92,6 +95,7 @@ async function MoveToCompleteTodo() {
         }
     ]);
     completed_todo_s.push(`${completed_todo_s.length + 1}) ${answers.moveToDo}`)
+    todo_job_list = todo_job_list.filter(todo => todo !== answers.moveToDo);
     Application()
 }
 Application()
