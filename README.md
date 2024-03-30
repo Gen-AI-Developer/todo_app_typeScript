@@ -1,6 +1,6 @@
 # TODO CLI Application in Typescript by Gen-AI-Developer (Syed Safdar Ali Shah)
 
-Foobar is a Python library for dealing with word pluralization.
+Inquirer is typescript package which is used to take different types of input from user on CLI.
 
 ## Installation
 
