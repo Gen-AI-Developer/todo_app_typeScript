@@ -19,17 +19,33 @@ async function Application() {
         }
     ]);
     if (answers.todo_name == '*> View TODOs') {
-        console.log(todo_job_list)
+        if (todo_job_list.length > 0) {
+            console.log(todo_job_list)
+        }
         Application()
     }
     else if (answers.todo_name == '*> Add  TODO') {
         Add_TODO()
     }
     else if (answers.todo_name == '*> Del  TODO') {
-        Delete_TODO()
+        if (todo_job_list.length > 0) {
+            Delete_TODO()
+        }
+        else {
+            console.log('No Todo to Delete, please Add.')
+            Application()
+        }
+
 
     }
     else if (answers.todo_name == '*> Move to Complete') {
+        if (todo_job_list.length > 0) {
+
+            MoveToCompleteTodo()
+        } else {
+            console.log('No Todo to Delete, please Add.')
+            Application()
+        }
 
     }
     else if (answers.todo_name == '*> View Completed  TODOs') {
@@ -62,8 +78,22 @@ async function Delete_TODO() {
 
         }
     ]);
-    todo_job_list.filter(Delete_TODO)
+    todo_job_list = todo_job_list.filter(todo => todo !== answers.deleteToDo);
     Application()
 
 }
+async function MoveToCompleteTodo() {
+    const answers = await inquirer.prompt([
+        {
+            type: 'list',
+            name: 'moveToDo',
+            choices: todo_job_list
+
+        }
+    ]);
+    completed_todo_s.push(`${completed_todo_s.length + 1}) ${answers.moveToDo}`)
+    Application()
+}
 Application()
+
+
