@@ -1,2 +1,41 @@
-# todo_app_typeScript
-this project contain simple todo application build with Typescript
+# TODO CLI Application in Typescript by Gen-AI-Developer (Syed Safdar Ali Shah)
+
+Foobar is a Python library for dealing with word pluralization.
+
+## Installation
+
+Use the package manager [npm](https://www.npmjs.com/package/inquirer) to install Inquirer.
+
+```bash
+npm  i inquirer
+```
+
+## Usage
+
+```typescript
+const answers = await inquirer.prompt([
+        {
+            type: 'list',
+            name: 'todo_name',
+            choices: [
+                '*> View TODOs',
+                '*> Add  TODO',
+                '*> Del  TODO',
+                '*> Move to Complete',
+                '*> View Completed  TODOs',
+                '*> Exit  TODO',
+            ]
+        }
+    ]);
+```
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
