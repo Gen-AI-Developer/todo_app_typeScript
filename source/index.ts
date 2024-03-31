@@ -1,4 +1,4 @@
-#! /bin/usr/env/ node
+#! /usr/bin/env node
 import inquirer from "inquirer"
 process.stdin.setMaxListeners(20); // Set the number as needed
 let todo_job_list = [
