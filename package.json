@@ -4,7 +4,7 @@
   "description": "This is simple todo app build with typescript and inquirer",
   "main": "index.js",
   "type": "module",
-  "bin": "./index.js",
+  "bin": "./dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
