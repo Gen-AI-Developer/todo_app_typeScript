@@ -1,6 +1,6 @@
 {
   "name": "todo_app_typescript",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "This is simple todo app build with typescript and inquirer",
   "main": "index.js",
   "type": "module",
